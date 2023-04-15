@@ -78,7 +78,7 @@ def get_messages():
     sender_id = request.args.get('senderId')
     receiver_id = request.args.get('receiverId')
     m = collection.find({'senderId': sender_id,'receiverId': receiver_id},{"_id":0})
-    collection.update_many({'senderId': sender_id,'receiverId': receiver_id},{"$set":{'read':True}})
+    collection.update_many({'senderId': sender_id,'receiverId': receiver_id,'read':False},{"$set":{'read':True}})
     message_list = []
     for msg in m:
         message_list.append({
@@ -87,6 +87,20 @@ def get_messages():
         })
     return jsonify({'messages': message_list})
 
+@app.route('/get-new-messages', methods=['GET'])
+def get_new_messages():
+
+    sender_id = request.args.get('senderId')
+    receiver_id = request.args.get('receiverId')
+    m = collection.find({'senderId': sender_id,'receiverId': receiver_id,'read':False},{"_id":0})
+    collection.update_many({'senderId': sender_id,'receiverId': receiver_id,'read':False},{"$set":{'read':True}})
+    message_list = []
+    for msg in m:
+        message_list.append({
+            'message': msg['message'],
+            'createdAt': msg['createdAt']
+        })
+    return jsonify({'messages': message_list})
 
 if __name__ == '__main__':
     app.run(debug=True, port=os.getenv("PORT", default=5000))
