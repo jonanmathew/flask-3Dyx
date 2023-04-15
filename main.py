@@ -32,7 +32,7 @@ def store_message():
     return jsonify({'addedMessage': True})
     
 @app.route('/get-users', methods=['GET'])
-def get_receiver_ids():
+def get_users():
 
     sender_id = request.args.get('senderId')
     messagess = collection.find({'senderId': sender_id},{"_id":0})
@@ -69,7 +69,7 @@ def get_receiver_ids():
         })
     print(final_arr)
     final_arr_sorted=sorted(final_arr,key=lambda user:user["createdAt"])      
-    return jsonify({'receiverIds': final_arr_sorted})
+    return jsonify({'users': final_arr_sorted})
                     
         
 @app.route('/get-messages', methods=['GET'])
