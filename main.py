@@ -96,6 +96,7 @@ def get_new_messages():
     collection.update_many({'senderId': sender_id,'receiverId': receiver_id,'read':False},{"$set":{'read':True}})
     message_list = []
     for msg in m:
+        print(msg)
         message_list.append({
             'message': msg['message'],
             'createdAt': msg['createdAt']
