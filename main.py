@@ -38,7 +38,7 @@ def auth_verify_token(func):
 
     return middleware
 
-@app.route('/get-users', methods=['GET'])
+@app.route('/api/get-users', methods=['GET'])
 @auth_verify_token
 def get_users():
     data = request.json
@@ -55,7 +55,7 @@ def get_users():
     return jsonify({'users': users})
 
     
-@app.route("/add-message", methods=["POST"])
+@app.route("/api/add-message", methods=["POST"])
 @auth_verify_token
 def store_message():
     data = request.json
@@ -73,7 +73,7 @@ def store_message():
     message_collection.insert_one(message_doc)
     return jsonify({'addedMessage': True})
     
-@app.route('/get-chats', methods=['GET'])
+@app.route('/api/get-chats', methods=['GET'])
 @auth_verify_token
 def get_chats():
     sender_id = request.args.get('senderId')
@@ -112,7 +112,7 @@ def get_chats():
     return jsonify({'users': final_arr_sorted})
                     
         
-@app.route('/get-messages', methods=['GET'])
+@app.route('/api/get-messages', methods=['GET'])
 @auth_verify_token
 def get_messages():
     sender_id = request.args.get('senderId')
@@ -127,7 +127,7 @@ def get_messages():
         })
     return jsonify({'messages': message_list})
 
-@app.route('/get-new-messages', methods=['GET'])
+@app.route('/api/get-new-messages', methods=['GET'])
 @auth_verify_token
 def get_new_messages():
     sender_id = request.args.get('senderId')
@@ -143,7 +143,7 @@ def get_new_messages():
         })
     return jsonify({'messages': message_list})
 
-@app.route("/add-chatbot-message", methods=["POST"])
+@app.route("/api/add-chatbot-message", methods=["POST"])
 @auth_verify_token
 def chatbot_message():
     data = request.json
