@@ -9,9 +9,7 @@ from flask_cors import CORS
 
 app = Flask(__name__)
 
-CORS(app, resources={
-    r"/api/*": {"origins": ["http://localhost:3000", "https://classio.vercel.app"]}
-})
+CORS(app, origins=['http://localhost:3000', 'https://classio.vercel.app'], supports_credentials=True)
 
 load_dotenv()
 
