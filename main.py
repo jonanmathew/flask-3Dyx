@@ -44,7 +44,6 @@ def auth_verify_token(func):
 @app.route('/api/get-users', methods=['GET'])
 @auth_verify_token
 def get_users():
-    data = request.json
     code = request.code  
     students = student_collection.find({'code': code},{"uid":1})
     teachers = teacher_collection.find({'code': code},{"uid":1})
