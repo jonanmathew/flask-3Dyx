@@ -5,10 +5,15 @@ from pymongo import MongoClient
 from firebase import auth
 from functools import wraps
 from dotenv import load_dotenv
+from flask_cors import CORS
+
+app = Flask(__name__)
+
+CORS(app, resources={
+    r"/api/*": {"origins": ["http://localhost:3000", "https://classio.vercel.app"]}
+})
 
 load_dotenv()
-    
-app = Flask(__name__)
 
 mongodb_uri = os.getenv("MONGODB_URI")
 client = MongoClient(mongodb_uri)
