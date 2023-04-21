@@ -59,8 +59,8 @@ def get_users():
 @auth_verify_token
 def store_message():
     data = request.json
-    sender_id = data.get('senderId')
-    receiver_id = data.get('receiverId')
+    sender_id = request.args.get('senderId')  
+    receiver_id = request.args.get('receiverId')
     message = data.get('message')
     created_at = datetime.datetime.utcnow().isoformat()    
     message_doc = {
