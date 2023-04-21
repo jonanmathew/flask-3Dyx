@@ -155,5 +155,7 @@ pyvenv.cfg
 .venv
 pip-selfcheck.json
 
+# temp
+temp.txt
 
 # End of https://www.toptal.com/developers/gitignore/api/python
