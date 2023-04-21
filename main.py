@@ -43,15 +43,15 @@ def auth_verify_token(func):
 def get_users():
     data = request.json
     code = request.code  
-    students = student_collection.find({'code': code},{"_id":0,"uid":1})
-    teachers = teacher_collection.find({'code': code},{"_id":0,"uid":1})
+    students = student_collection.find({'code': code},{"uid":1})
+    teachers = teacher_collection.find({'code': code},{"uid":1})
     users=[]
     for student in list(students):
         user=auth.get_user(student["uid"])
-        users.append({"displayName":user.display_name.split("|")[2],"photoURL":user.photo_url})
+        users.append({"userID":str(student["_id"]),"displayName":user.display_name.split("|")[2],"photoURL":user.photo_url})
     for teacher in list(teachers):
         user=auth.get_user(teacher["uid"])
-        users.append({"displayName":user.display_name.split("|")[2],"photoURL":user.photo_url})
+        users.append({"userID":str(teacher["_id"]),"displayName":user.display_name.split("|")[2],"photoURL":user.photo_url})
     return jsonify({'users': users})
 
     
