@@ -15,7 +15,7 @@ load_dotenv()
 
 # ----------------------------- CORS -----------------------------
 client_url = os.getenv("CLIENT_URL")
-CORS(app, origins=client_url.split('|'), supports_credentials=True)
+CORS(app, origins=client_url, supports_credentials=True)
 
 # ----------------------------- DB config -----------------------------
 mongodb_uri = os.getenv("MONGODB_URI")
@@ -70,19 +70,82 @@ def get_sender_id():
 @app.route('/api/get-users', methods=['GET'])
 @auth_verify_token
 def get_users():
+    sender_id = get_sender_id()
     user_code = request.user_code
     students = student_collection.find({'code': user_code}, {"uid": 1})
     teachers = teacher_collection.find({'code': user_code}, {"uid": 1})
     users = []
     for student in list(students):
         user = auth.get_user(student["uid"])
-        users.append({"userId": str(student["_id"]), "name": user.display_name.split(
-            "|")[2], "photoURL": user.photo_url})
+        name = user.display_name.split(
+            "|")[2]
+        if str(student['_id']) != sender_id:
+            users.append(
+                {"userId": str(student["_id"]), 'email': user.email, "name": name, "photoURL": user.photo_url})
+
     for teacher in list(teachers):
         user = auth.get_user(teacher["uid"])
-        users.append({"userId": str(teacher["_id"]), "name": user.display_name.split(
-            "|")[2], "photoURL": user.photo_url})
+        name = user.display_name.split(
+            "|")[2]
+        if str(teacher['_id']) != sender_id:
+            users.append(
+                {"userId": str(teacher["_id"]), 'email': user.email, "name": name, "photoURL": user.photo_url})
+
     return jsonify({'users': users})
+
+
+@app.route('/api/get-chats', methods=['GET'])
+@auth_verify_token
+def get_chats():
+    sender_id = get_sender_id()
+    messages = message_collection.find(
+        {'$or': [{'senderId': sender_id}, {'receiverId': sender_id}]}, {"_id": 0})
+    receiver_ids = []
+    for msg in list(messages):
+        msg_receiver_id = msg['receiverId']
+        msg_sender_id = msg['senderId']
+        if msg_receiver_id == sender_id:
+            receiver_ids.append(msg_sender_id)
+        elif msg_sender_id == sender_id:
+            receiver_ids.append(msg_receiver_id)
+    final_receiver_ids = list(set(receiver_ids))
+    last_message = []
+    receiver_last_message = []
+    unread_arr = []
+    for receiver_id in final_receiver_ids:
+        mssgs = message_collection.find(
+            {'senderId': {'$in': [sender_id, receiver_id]}, 'receiverId': {'$in': [sender_id, receiver_id]}}, {"_id": 0})
+        messages_list = list(mssgs)
+        messages_list.reverse()
+        last_message.append(messages_list[0]["createdAt"])
+        is_unread = False
+        is_already_added = False
+        for mssg in messages_list:
+            if mssg['receiverId'] == sender_id:
+                if not is_already_added:
+                    print(mssg['receiverId'], sender_id)
+                    receiver_last_message.append(mssg["createdAt"])
+                if mssg['read'] == False:
+                    is_unread = True
+                if is_already_added and is_unread:
+                    break
+        if not is_already_added:
+            receiver_last_message.append('')
+        if (is_unread):
+            unread_arr.append(True)
+        else:
+            unread_arr.append(False)
+    chats = []
+    for i, rid in enumerate(final_receiver_ids):
+        chats.append({
+            "userId": rid,
+            "unread": unread_arr[i],
+            'lastMessage': last_message[i],
+            "receiverLastMessage": receiver_last_message[i]
+        })
+    chats_sorted = sorted(chats, key=lambda user: datetime.strptime(
+        user["lastMessage"].strftime('%Y-%m-%d %H:%M:%S'), "%Y-%m-%d %H:%M:%S"), reverse=True)
+    return jsonify({'chats': chats_sorted})
 
 
 @app.route("/api/send-message", methods=["POST"])
@@ -104,59 +167,26 @@ def send_message():
     return jsonify({'sentMessage': True})
 
 
-@app.route('/api/get-chats', methods=['GET'])
-@auth_verify_token
-def get_chats():
-    sender_id = get_sender_id()
-    messagess = message_collection.find({'senderId': sender_id}, {"_id": 0})
-    receiver_ids = []
-    for msg in messagess:
-        receiver_id = msg['receiverId']
-        receiver_ids.append(receiver_id)
-    final_receiver_ids = list(set(receiver_ids))
-    created_at_arr = []
-    unread_arr = []
-    for ri in final_receiver_ids:
-        mssgss = message_collection.find(
-            {'senderId': sender_id, 'receiverId': ri}, {"_id": 0})
-        messages_list = list(mssgss)
-        created_at_arr.append(messages_list[-1]["createdAt"])
-        ctr = 0
-        for mssg in messages_list:
-            if (mssg['read'] == False):
-                ctr = 1
-                break
-        if (ctr == 1):
-            unread_arr.append(True)
-        else:
-            unread_arr.append(False)
-    final_arr = []
-    for i, ri in enumerate(final_receiver_ids):
-        final_arr.append({
-            "userId": ri,
-            "unread": unread_arr[i],
-            "createdAt": created_at_arr[i]
-        })
-    final_arr_sorted = sorted(final_arr, key=lambda user: user["createdAt"])
-    return jsonify({'chats': final_arr_sorted})
-
-
 @app.route('/api/get-messages', methods=['GET'])
 @auth_verify_token
 def get_messages():
     sender_id = get_sender_id()
     receiver_id = request.args.get('receiverId')
     mssgs = message_collection.find(
-        {'senderId': sender_id, 'receiverId': receiver_id}, {"_id": 0})
+        {'senderId': {'$in': [sender_id, receiver_id]}, 'receiverId': {'$in': [sender_id, receiver_id]}}, {"_id": 0})
     message_list = []
     for msg in list(mssgs):
+        sender = False
+        if msg['senderId'] == sender_id:
+            sender = True
         message_list.append({
+            'sender': sender,
             'message': msg['message'],
             'createdAt': msg['createdAt'],
             "read": msg['read']
         })
     message_collection.update_many(
-        {'senderId': sender_id, 'receiverId': receiver_id, 'read': False}, {"$set": {'read': True}})
+        {'senderId': receiver_id, 'receiverId': sender_id, 'read': False}, {"$set": {'read': True}})
     return jsonify({'messages': message_list})
 
 
@@ -166,16 +196,18 @@ def get_new_messages():
     sender_id = get_sender_id()
     receiver_id = request.args.get('receiverId')
     mssgs = message_collection.find(
-        {'senderId': sender_id, 'receiverId': receiver_id, 'read': False}, {"_id": 0})
+        {'senderId': receiver_id, 'receiverId': sender_id, 'read': False}, {"_id": 0})
     message_list = []
     for msg in list(mssgs):
         message_list.append({
+            'sender': False,
             'message': msg['message'],
             'createdAt': msg['createdAt'],
+            'read': True
         })
     message_collection.update_many(
-        {'senderId': sender_id, 'receiverId': receiver_id, 'read': False}, {"$set": {'read': True}})
-    return jsonify({'new_messages': message_list})
+        {'senderId': receiver_id, 'receiverId': sender_id, 'read': False}, {"$set": {'read': True}})
+    return jsonify({'newMessages': message_list})
 
 
 @app.route("/api/send-message-chatbot", methods=["POST"])
