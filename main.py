@@ -6,7 +6,7 @@ from pymongo import MongoClient
 from firebase import auth
 from functools import wraps
 from dotenv import load_dotenv
-from flask_cors import CORS
+from flask_cors import CORS, cross_origin
 
 # ----------------------------- App config -----------------------------
 app = Flask(__name__)
@@ -68,6 +68,7 @@ def get_sender_id():
 
 
 @app.route('/api/get-users', methods=['GET'])
+@cross_origin()
 @auth_verify_token
 def get_users():
     sender_id = get_sender_id()
@@ -95,6 +96,7 @@ def get_users():
 
 
 @app.route('/api/get-chats', methods=['GET'])
+@cross_origin()
 @auth_verify_token
 def get_chats():
     sender_id = get_sender_id()
@@ -149,6 +151,7 @@ def get_chats():
 
 
 @app.route("/api/send-message", methods=["POST"])
+@cross_origin()
 @auth_verify_token
 def send_message():
     sender_id = get_sender_id()
@@ -168,6 +171,7 @@ def send_message():
 
 
 @app.route('/api/get-messages', methods=['GET'])
+@cross_origin()
 @auth_verify_token
 def get_messages():
     sender_id = get_sender_id()
@@ -191,6 +195,7 @@ def get_messages():
 
 
 @app.route('/api/get-new-messages', methods=['GET'])
+@cross_origin()
 @auth_verify_token
 def get_new_messages():
     sender_id = get_sender_id()
@@ -211,6 +216,7 @@ def get_new_messages():
 
 
 @app.route("/api/send-message-chatbot", methods=["POST"])
+@cross_origin()
 @auth_verify_token
 def send_message_chatbot():
     sender_id = get_sender_id()
