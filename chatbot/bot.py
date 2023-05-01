@@ -6,7 +6,14 @@ import torch
 import torch.nn as nn
 from torch.utils.data import DataLoader,Dataset
 
-nltk.download('popular')
+nltk.download('maxent_ne_chunker')
+nltk.download('omw-1.4')
+nltk.download('wordnet')
+nltk.download('stopwords')
+nltk.download('large_grammars')
+nltk.download('snowball_data')
+nltk.download('averaged_perceptron_tagger')
+nltk.download('punkt')
 
 with open('./chatbot/chat.json','r') as f:
     chat=json.load(f)
