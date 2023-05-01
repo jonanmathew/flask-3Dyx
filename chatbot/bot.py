@@ -6,6 +6,8 @@ import torch
 import torch.nn as nn
 from torch.utils.data import DataLoader,Dataset
 
+nltk.download("punkt")
+
 with open('./chatbot/chat.json','r') as f:
     chat=json.load(f)
     
