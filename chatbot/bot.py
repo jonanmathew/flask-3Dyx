@@ -6,8 +6,7 @@ import torch
 import torch.nn as nn
 from torch.utils.data import DataLoader,Dataset
 
-nltk.download("punkt")
-nltk.download("wordnet")
+nltk.download('popular')
 
 with open('./chatbot/chat.json','r') as f:
     chat=json.load(f)
