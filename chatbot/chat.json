@@ -1,0 +1,371 @@
+{
+    "chat": [
+        {
+            "tag": "greeting",
+            "patterns": [
+                "Hi",
+                "Hey",
+                "Is anyone there?",
+                "Hello",
+                "Good day",
+                "hola"
+            ],
+            "responses": [
+                "Hey :-)",
+                "Hello",
+                "Hi there, what can I do for you?",
+                "Hi there, how can I help?"
+            ]
+        },
+        {
+            "tag": "goodbye",
+            "patterns": [
+                "Bye",
+                "See you later",
+                "Goodbye"
+            ],
+            "responses": [
+                "See you later, thanks for visiting",
+                "Have a nice day",
+                "Bye! Come back again soon."
+            ]
+        },
+        {
+            "tag": "name",
+            "patterns": [
+                "Name?"
+            ],
+            "responses": [
+                "My name is Classio Jr",
+                "You can call me Classio Jr",
+                "I respond to Classio Jr."
+            ]
+        },
+        {
+            "tag": "thanks",
+            "patterns": [
+                "Thanks",
+                "Thank you",
+                "That is helpful",
+                "Thanks a lot!"
+            ],
+            "responses": [
+                "Happy to help!",
+                "Any time!",
+                "My pleasure"
+            ]
+        },
+        {
+            "tag": "Question1",
+            "patterns": [
+                "how to upload notes to courses?",
+                "uploading notes in classio",
+                "add notes"
+            ],
+            "responses": [
+                "To access your course material, go to 'Courses' on the left panel or use the keyboard shortcut ctrl+shift+2, select your course, click on 'View Modules' and upload more material by clicking the '+' icon next to the 'Course Module Materials' tab."
+            ]
+        },
+        {
+            "tag": "Question2",
+            "patterns": [
+                "where can i add assignments in classio",
+                "adding assignments"
+            ],
+            "responses": [
+                "This function is exclusive to teachers. To access it, go to the 'Courses' page on the left panel or use the keyboard shortcut ctrl+shift+2, select a course, and click on 'Course Overview.' From there, you can add assignments by clicking on the '+' icon on the 'Assignments' tab, and provide questions, upload files, and set a due date."
+            ]
+        },
+        {
+            "tag": "Question3",
+            "patterns": [
+                "where can i find the syllabus",
+                "where can i view the syllabus",
+                "syllabus?"
+            ],
+            "responses": [
+                "Please visit your courses page from the left panel or use the keyboard shortcut ctrl+shift+2 and you can select a course of your choice.Once you have selected the course,you can view the module wise syllabus in detail."
+            ]
+        },
+        {
+            "tag": "Help",
+            "patterns": [
+                "can you help me with a question?",
+                "can you help me with this question?",
+                "I have a question for you",
+                "I have a doubt",
+                "question",
+                "doubt",
+                "can you help me with a doubt",
+                "Can you help me with this doubt",
+                "i need help"
+            ],
+            "responses": [
+                "Yes i can help you with your question",
+                "Yes i can help you with your doubt",
+                "Sure.I can help you",
+                "Ask me what you want to know"
+            ]
+        },
+        {
+            "tag": "Casual",
+            "patterns": [
+                "I am feeling stressed",
+                "Can you tell me a joke?",
+                "i want a joke",
+                "Joke",
+                "Tell me something funny",
+                "Funny",
+                "Tell me a joke"
+            ],
+            "responses": [
+                "What do dentists call their x-rays? Tooth pics!",
+                "Do you want to hear a construction joke? Sorry, Im still working on it.",
+                "Why should you never trust stairs? They are always up to something.",
+                "Why did the bullet end up losing his job? He got fired",
+                "Why did the scarecrow win an award? Because he was outstanding in his field!",
+                "Why don't scientists trust atoms? Because they make up everything!",
+                "I'm reading a book on the history of glue. I just can't seem to put it down!",
+                "What do you get when you cross a snowman and a shark? Frostbite!",
+                "Why did the bicycle fall over? Because it was two-tired!",
+                "Why did the tomato turn red? Because it saw the salad dressing!",
+                "Why did the coffee file a police report? Because it got mugged!",
+                "What do you call fake spaghetti? An impasta!",
+                "What do you call a fake noodle? An impasta!",
+                "I'm on a whiskey diet. I've lost three days already!"
+            ]
+        },
+        {
+            "tag": "calculator",
+            "patterns": [
+                "+",
+                "-",
+                "/",
+                "*",
+                "%",
+                "**",
+                "root",
+                "sin",
+                "cos",
+                "tan",
+                "1 + 2",
+                "3 root 4",
+                "5 - 6",
+                "7 * 8",
+                "9 ** 2",
+                "1 % 2",
+                "sin(30)",
+                "cos(45)",
+                "tan(90)",
+                "3+ 0-45 *3**2",
+                "5%6+ 67-43",
+                "9-0+3% 6/34",
+                "965+-536 /78",
+                "45+sin(96) -cos(83)",
+                "98+32",
+                "2root8",
+                "44root32"
+            ],
+            "responses": [
+                "Calculator coming up...."
+            ]
+        },
+        {
+            "tag": "converter",
+            "patterns": [
+                "Converter",
+                "convert ",
+                "Convert "
+            ],
+            "responses": [
+                "Converter coming up...."
+            ]
+        },
+        {
+            "tag": "translator",
+            "patterns": [
+                "translate    to   french",
+                "translate to german",
+                "Translate",
+                "translate",
+                "translate to dutch"
+            ],
+            "responses": [
+                "Translator coming up...."
+            ]
+        },
+        {
+            "tag": "classiojrfn",
+            "patterns": [
+                "what can you do ?",
+                "what functions can you perform?"
+            ],
+            "responses": [
+                "List of functions coming up...."
+            ]
+        },
+        {
+            "tag": "spell",
+            "patterns": [
+                "Spellcheck ",
+                "spell check",
+                "spell check word",
+                "spelling checker ",
+                "Spellcheck   ",
+                "spell checker"
+            ],
+            "responses": [
+                "Spell checker coming up...."
+            ]
+        },
+        {
+            "tag": "Q4",
+            "patterns": [
+                "Can i change classio to dark mode?",
+                "dark mode in classio",
+                "light mode in classio",
+                "Can i change classio to light mode?",
+                "is dark and light mode available and how do i change it"
+            ],
+            "responses": [
+                "Yes, both dark and light mode are available in Classio. To switch modes, click on the 'moon' symbol on the left panel or use the keyboard shortcut Ctrl+Q. You can also schedule modes by going to 'Settings'."
+            ]
+        },
+        {
+            "tag": "Q5",
+            "patterns": [
+                "Can i send messages to teachers and other students?",
+                "messages in classio",
+                "Can i send messages to teachers?",
+                "Can i send messages to students?"
+            ],
+            "responses": [
+                "Yes, you can send messages in Classio to teachers and other students. To access the chat feature, click on the 'message' icon on the left panel or use the keyboard shortcut Ctrl+M."
+            ]
+        },
+        {
+            "tag": "Q6",
+            "patterns": [
+                "Can i create a todo list?",
+                "todo list in classio"
+            ],
+            "responses": [
+                "Yes, you can create a to-do list in Classio. The to-do list is located in the 'Agenda' tab on your dashboard, which can be found on the bottom right corner of the page."
+            ]
+        },
+        {
+            "tag": "Q7",
+            "patterns": [
+                "Can i view my timetable?",
+                "timetable in classio"
+            ],
+            "responses": [
+                "Yes, you can view your timetable on your dashboard"
+            ]
+        },
+        {
+            "tag": "Q8",
+            "patterns": [
+                "how do i access settings in classio?",
+                "settings in classio"
+            ],
+            "responses": [
+                "To access settings in classio, please click on the 'settings' icon on the panel to your left or use the keyboard shortcut ctrl+shift+u"
+            ]
+        },
+        {
+            "tag": "Q9",
+            "patterns": [
+                "how do i add attendance in classio?",
+                "adding attendance in classio",
+                "adding attendance"
+            ],
+            "responses": [
+                "This function is only available for teachers. Please go to the left panel and select 'Courses' or use the keyboard shortcut ctrl+shift+2 and then choose the course you want to work on. Click on 'Course Overview', and then you can add attendance by clicking on the 'Add Attendance' button located on the top of the 'Attendance' tab. You can add attendance by date and even update the attendance status."
+            ]
+        },
+        {
+            "tag": "Q10",
+            "patterns": [
+                "how do i add students to a course in classio?",
+                "adding students to course in classio",
+                "adding students"
+            ],
+            "responses": [
+                "This function is only available for teachers. Please go to the left panel and select 'Courses' or use the keyboard shortcut ctrl+shift+2, and then choose the course you want to work on. Click on 'Course Overview', and then you can add students by clicking on the '+' icon located on the top of the 'Students' tab. You can add students by their email or from an entire class."
+            ]
+        },
+        {
+            "tag": "Q11",
+            "patterns": [
+                "how do i add exams in classio?",
+                "adding exams in classio",
+                "adding exams"
+            ],
+            "responses": [
+                "This function is only available for teachers. Please go to the left panel and select 'Courses' or use the keyboard shortcut ctrl+shift+2, and then choose the course you want to work on. Click on 'Course Overview', and then you can add exams by clicking on the '+' icon located on the top of the 'Exams' tab. You can add exams by date."
+            ]
+        },
+        {
+            "tag": "Q12",
+            "patterns": [
+                "activity points in classio?",
+                "adding activity points in classio",
+                "activity points",
+                "reviewing activity points in classio"
+            ],
+            "responses": [
+                "Both teachers and students can access the 'Activity Points' page from the left panel or by using the keyboard shortcut ctrl+shift+4. Students can view their overall points status and can add new point requests by clicking on the '+' icon and providing necessary details and media. Students can also view their pending, approved, and rejected requests. Teachers can view the overall points overview of the entire class. They can review and then reject or accept the requests they have. Teachers can also view their pending and reviewed requests."
+            ]
+        },
+        {
+            "tag": "Q13",
+            "patterns": [
+                "can i upload my own notes in classio?",
+                "can i upload my personal notes in classio?",
+                "adding own notes",
+                "own notes",
+                "own materials",
+                "personal notes",
+                "personal materials"
+            ],
+            "responses": [
+                "Please visit your 'Courses' page from the left panel or use the keyboard shortcut ctrl+shift+2, and you can select a course of your choice. Once you have selected the course, visit the module wise materials page. Then click on the '+' icon next to the 'Personal Module Materials' tab and add your notes"
+            ]
+        },
+        {
+            "tag": "Q14",
+            "patterns": [
+                "can i view my exam marks in classio?",
+                "exam marks",
+                "marks",
+                "view marks"
+            ],
+            "responses": [
+                "Please visit your 'Courses' page from the left panel or use the keyboard shortcut ctrl+shift+2, and you can select a course of your choice. Once you have selected the course, you can view your exam marks there." 
+            ]       
+        },
+        {
+            "tag": "Q15",
+            "patterns": [
+                "can i view my attendance in classio?",
+                "view attendance",
+                "attendance"
+            ],
+            "responses": [
+                "You can view your course wise attendance in the student dashboard" 
+            ]       
+        },
+        {
+            "tag": "Q16",
+            "patterns": [
+                "can i view my assignments in classio?",
+                "view assignments",
+                "my assignments"
+            ],
+            "responses": [
+                "You can view your assigned, in-progress, and submitted assignments in the 'Assignments' page, which you can access from the panel on your left or by using the shortcut ctrl+shift+3." 
+            ]       
+        }
+    ]
+}

@@ -7,6 +7,7 @@ from firebase import auth
 from functools import wraps
 from dotenv import load_dotenv
 from flask_cors import CORS, cross_origin
+from chatbot.chat import chatbot
 
 # ----------------------------- App config -----------------------------
 app = Flask(__name__)
@@ -220,25 +221,30 @@ def get_new_messages():
 @auth_verify_token
 def send_message_chatbot():
     sender_id = get_sender_id()
+    chatbot_id = os.getenv("CHATBOT_ID")
     data = request.json
     message = data.get('message')
     created_at = datetime.utcnow()
     message_doc = {
         'senderId': sender_id,
-        'receiverId': "69",
+        'receiverId': chatbot_id,
         'message': message,
         'createdAt': created_at,
         'read': True
     }
     message_collection.insert_one(message_doc)
+    ans=chatbot(message)
+    created_at = datetime.utcnow()
     reply_doc = {
-        'senderId': "69",
+        'senderId': chatbot_id,
         'receiverId': sender_id,
-        'message': message,
+        'message': ans,
         'createdAt': created_at,
-        'read': False
+        'read': True
     }
-    return jsonify({'sentMessage': True, 'replyMessage': reply_doc})
+    message_collection.insert_one(reply_doc)
+
+    return jsonify({'sentMessage': True, 'replyMessage': ans})
 
 
 # ----------------------------- Application run -----------------------------
