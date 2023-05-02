@@ -12,6 +12,15 @@ import nltk
 from nltk.stem import WordNetLemmatizer
 import torch.nn as nn
 
+nltk.download('maxent_ne_chunker')
+nltk.download('omw-1.4')
+nltk.download('wordnet')
+nltk.download('stopwords')
+nltk.download('large_grammars')
+nltk.download('snowball_data')
+nltk.download('averaged_perceptron_tagger')
+nltk.download('punkt')
+
 device = torch.device('cuda' if torch.cuda.is_available() else 'cpu')
 
 with open('./chatbot/chat.json', 'r') as json_data:
