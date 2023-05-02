@@ -1,13 +1,16 @@
 import random
 import json
 import torch
-from chatbot.bot import NeuralNet,bag_of_words,tokenizer
 from chatbot.calc import get_num
 from chatbot.converter import converter
 from chatbot.translator import translator
 from chatbot.spellcheck import spell
 from chatbot.webs import find_source,scrape
 import re
+import numpy as np
+import nltk
+from nltk.stem import WordNetLemmatizer
+import torch.nn as nn
 
 device = torch.device('cuda' if torch.cuda.is_available() else 'cpu')
 
@@ -26,9 +29,41 @@ all_words = data['all_words']
 tags = data['tags']
 model_state = data["model_state"]
 
+class NeuralNet(nn.Module):
+    def __init__(self,input_size,hidden_size,num_classes):
+        super(NeuralNet,self).__init__()
+        self.l1=nn.Linear(input_size,hidden_size)
+        self.l2=nn.Linear(hidden_size,hidden_size)
+        self.l3=nn.Linear(hidden_size,num_classes)
+        self.relu=nn.ReLU()
+    
+    def forward(self, x):
+        out = self.l1(x)
+        out = self.relu(out)
+        out = self.l2(out)
+        out = self.relu(out)
+        out = self.l3(out)
+        return out
+
 model = NeuralNet(input_size, hidden_size, output_size).to(device)
 model.load_state_dict(model_state)
 model.eval()
+
+wml=WordNetLemmatizer()
+
+def tokenizer(sentence):
+    return nltk.word_tokenize(sentence)
+
+def lemmatize(words):
+    return wml.lemmatize(words.lower())
+
+def bag_of_words(tokenized_sentence, words):
+    sentence_words = [lemmatize(word) for word in tokenized_sentence]
+    bag = np.zeros(len(words), dtype=np.float32)
+    for idx, w in enumerate(words):
+        if w in sentence_words: 
+            bag[idx] = 1
+    return bag
         
 def chatbot(sentence):
         query=sentence
