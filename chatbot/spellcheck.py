@@ -1,6 +1,7 @@
 import enchant
 import re
 
+
 def spell(sentence):
     engdict = enchant.Dict("en_US")
     misspelled = []
@@ -25,4 +26,4 @@ def spell(sentence):
             output += ")"
             if i != len(misspelled) - 1:
                 output += "\n "
-        return(output)
+        return (output)

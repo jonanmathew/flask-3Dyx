@@ -27,6 +27,10 @@ main_db = client.classio_main_db
 student_collection = main_db.students
 teacher_collection = main_db.teachers
 
+# ----------------------------- Chatbot config -----------------------------
+
+chatbot_id = os.getenv("CHATBOT_ID")
+
 
 # ----------------------------- Auth verification middleware -----------------------------
 
@@ -107,10 +111,11 @@ def get_chats():
     for msg in list(messages):
         msg_receiver_id = msg['receiverId']
         msg_sender_id = msg['senderId']
-        if msg_receiver_id == sender_id:
-            receiver_ids.append(msg_sender_id)
-        elif msg_sender_id == sender_id:
-            receiver_ids.append(msg_receiver_id)
+        if msg_receiver_id != chatbot_id and msg_sender_id != chatbot_id:
+            if msg_receiver_id == sender_id:
+                receiver_ids.append(msg_sender_id)
+            elif msg_sender_id == sender_id:
+                receiver_ids.append(msg_receiver_id)
     final_receiver_ids = list(set(receiver_ids))
     last_message = []
     receiver_last_message = []
@@ -126,7 +131,6 @@ def get_chats():
         for mssg in messages_list:
             if mssg['receiverId'] == sender_id:
                 if not is_already_added:
-                    print(mssg['receiverId'], sender_id)
                     receiver_last_message.append(mssg["createdAt"])
                 if mssg['read'] == False:
                     is_unread = True
@@ -216,12 +220,11 @@ def get_new_messages():
     return jsonify({'newMessages': message_list})
 
 
-@app.route("/api/send-message-chatbot", methods=["POST"])
+@app.route("/api/send-chatbot-message", methods=["POST"])
 @cross_origin(supports_credentials=True)
 @auth_verify_token
 def send_message_chatbot():
     sender_id = get_sender_id()
-    chatbot_id = os.getenv("CHATBOT_ID")
     data = request.json
     message = data.get('message')
     created_at = datetime.utcnow()
@@ -233,7 +236,7 @@ def send_message_chatbot():
         'read': True
     }
     message_collection.insert_one(message_doc)
-    ans=chatbot(message)
+    ans = chatbot(message)
     created_at = datetime.utcnow()
     reply_doc = {
         'senderId': chatbot_id,
@@ -243,8 +246,14 @@ def send_message_chatbot():
         'read': True
     }
     message_collection.insert_one(reply_doc)
+    reply = {
+        'sender': False,
+        'message': ans,
+        'createdAt': created_at,
+        'read': True
+    }
 
-    return jsonify({'sentMessage': True, 'replyMessage': ans})
+    return jsonify({'sentMessage': True, 'reply': reply})
 
 
 # ----------------------------- Application run -----------------------------

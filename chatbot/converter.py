@@ -38,4 +38,3 @@ class converter():
             return value / 1000
         else:
             return "Invalid conversion"
-        
