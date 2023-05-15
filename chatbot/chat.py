@@ -96,7 +96,7 @@ def chatbot(sentence):
     prob = probs[0][predicted.item()]
     if prob.item() > 0.85:
         for c in chats['chat']:
-            if tag == c["tag"] and tag != "calculator" and tag != "spell" and tag != "converter" and tag != "translator" and tag != "classiojrfn":
+            if tag == c["tag"] and tag != "calculator" and tag != "spell" and tag != "converter" and tag != "translator" and tag != "classiojrfn" and tag != "generalques":
                 return random.choice(c['responses'])
     else:
         ans = scrape(query)
@@ -131,4 +131,8 @@ def chatbot(sentence):
 
     if tag == "spell":
         ans = spell(query)
+        return (ans)
+    
+    if tag == "generalques":
+        ans = scrape(query)
         return (ans)

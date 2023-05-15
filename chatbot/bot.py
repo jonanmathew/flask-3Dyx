@@ -142,5 +142,5 @@ data = {
     "tags": tags
 }
 
-FILE = "data.pth"
+FILE = "./chatbot/data.pth"
 torch.save(data, FILE)

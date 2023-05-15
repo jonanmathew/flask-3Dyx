@@ -8,7 +8,11 @@
                 "Is anyone there?",
                 "Hello",
                 "Good day",
-                "hola"
+                "hola",
+                "heyyy",
+                "hii",
+                "helloo",
+                "morningg"
             ],
             "responses": [
                 "Hey :-)",
@@ -228,7 +232,7 @@
                 "is dark and light mode available and how do i change it"
             ],
             "responses": [
-                "Yes, both dark and light mode are available in Classio. To switch modes, click on the 'moon' symbol on the left panel or use the keyboard shortcut Ctrl+Q. You can also schedule modes by going to 'Settings'."
+                "Yes, both dark and light mode are available in Classio. To switch modes, click on the 'moon' symbol on the left panel or use the keyboard shortcut Ctrl+Q. You can also schedule modes by going to the 'Appearance' tab from 'Account'. Note: Scheduling prevents you from setting a mode other than the scheduled mode.Setting mode to System Default overrides the schedule  "
             ]
         },
         {
@@ -247,7 +251,11 @@
             "tag": "Q6",
             "patterns": [
                 "Can i create a todo list?",
-                "todo list in classio"
+                "todo list in classio",
+                "how to add todos",
+                "to dos",
+                "to do",
+                "how to add todos in classio"
             ],
             "responses": [
                 "Yes, you can create a to-do list in Classio. The to-do list is located in the 'Agenda' tab on your dashboard, which can be found on the bottom right corner of the page."
@@ -266,11 +274,14 @@
         {
             "tag": "Q8",
             "patterns": [
-                "how do i access settings in classio?",
-                "settings in classio"
+                "how do i access Account in classio?",
+                "Account in classio",
+                "settings in classio",
+                "settings",
+                "how do i access settings"
             ],
             "responses": [
-                "To access settings in classio, please click on the 'settings' icon on the panel to your left or use the keyboard shortcut ctrl+shift+u"
+                "To access Account in classio, please click on the 'Account' icon on the panel to your left or use the keyboard shortcut ctrl+shift+u"
             ]
         },
         {
@@ -327,7 +338,9 @@
                 "own notes",
                 "own materials",
                 "personal notes",
-                "personal materials"
+                "personal materials",
+                "uploading personal materials",
+                "uploading own notes"
             ],
             "responses": [
                 "Please visit your 'Courses' page from the left panel or use the keyboard shortcut ctrl+shift+2, and you can select a course of your choice. Once you have selected the course, visit the module wise materials page. Then click on the '+' icon next to the 'Personal Module Materials' tab and add your notes"
@@ -339,7 +352,8 @@
                 "can i view my exam marks in classio?",
                 "exam marks",
                 "marks",
-                "view marks"
+                "view marks",
+                "viewing marks"
             ],
             "responses": [
                 "Please visit your 'Courses' page from the left panel or use the keyboard shortcut ctrl+shift+2, and you can select a course of your choice. Once you have selected the course, you can view your exam marks there." 
@@ -350,7 +364,8 @@
             "patterns": [
                 "can i view my attendance in classio?",
                 "view attendance",
-                "attendance"
+                "attendance",
+                "viewing attendance"
             ],
             "responses": [
                 "You can view your course wise attendance in the student dashboard" 
@@ -361,10 +376,101 @@
             "patterns": [
                 "can i view my assignments in classio?",
                 "view assignments",
-                "my assignments"
+                "my assignments",
+                "viewing assignments"
             ],
             "responses": [
                 "You can view your assigned, in-progress, and submitted assignments in the 'Assignments' page, which you can access from the panel on your left or by using the shortcut ctrl+shift+3." 
+            ]       
+        },
+        {
+            "tag": "Q17",
+            "patterns": [
+                "Location permission in classio",
+                "does classio use my location",
+                "location permission"
+            ],
+            "responses": [
+                "Location permission needs to be granted to view weather details in your home page. Note: Your location data is neither stored anywhere nor used for any other purposes. It is only used to gather weather data in your locality." 
+            ]       
+        },
+        {
+            "tag": "Q18",
+            "patterns": [
+                "how can i change my email phone number and password in classio",
+                "how do i changing my e-mail in classio",
+                "how do i change my e mail",
+                "how can i changing my number in classio",
+                "how do i change my number",
+                "how do i changing my password in classio"
+            ],
+            "responses": [
+                "You can change your E-mail, phone number, and passwrod from the 'Login and Security' tab located in the 'Account' page. Note: These settings require you to verify your identity before changing them. Warning: You will be required to reauthenticate once you have updated this value" 
+            ]       
+        },
+        {
+            "tag": "Q19",
+            "patterns": [
+                "how can i change my name date of birth and gender and profile picture in classio",
+                "how do i changing my name in classio",
+                "how do i changing my dob",
+                "how can i change my gender in classio",
+                "how do i changing my date of birth in classio",
+                "how do i change my profile picture"
+            ],
+            "responses": [
+                "You can change your name, profile picture, gender and date of birth from the 'Profile Settings' tab located in the 'Account' page." 
+            ]       
+        },
+        {
+            "tag": "Q20",
+            "patterns": [
+                "can i view my personal details in classio?",
+                "view personal details",
+                "personal details",
+                "institution details",
+                "view class details",
+                "account details",
+                "account details in classio"
+
+            ],
+            "responses": [
+                "You can view personal details such as Institution details, Class details, and Account details from the 'Personal Details' tab located in the 'Account' page." 
+            ]       
+        },
+        {
+            "tag": "Q21",
+            "patterns": [
+                "how do i delete my account in classio?",
+                "deleting account",
+                "delete account"
+            ],
+            "responses": [
+                "To delete your account and associated data, contact your institution's administrator." 
+            ]       
+        },
+        {
+            "tag": "Q22",
+            "patterns": [
+                "how do i submit assignments in classio?",
+                "submitting assignments"
+            ],
+            "responses": [
+                "To submit assignments, click on the assignments icon from the left panel or use the keyboard shortcut ctrl+shift+3 and select the assignment you want. You can upload files and save your work. In the submitted tab, you can find your completed assignments along with marks. Note: Work cannot be updated once submitted. Warning: Any unsaved progress will be lost " 
+            ]       
+        },
+        {
+            "tag": "generalques",
+            "patterns": [
+                "what is the diameter of earth?",
+                "what is a tree",
+                "what do you mean by ai?",
+                "how can you change the colour of a leaf",
+                "what is a watch",
+                "what do you mean by network?"
+            ],
+            "responses": [
+                "nil" 
             ]       
         }
     ]
