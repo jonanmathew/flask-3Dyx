@@ -3,13 +3,7 @@
   "builds": [
     { "src": "main.py", "use": "@vercel/python" }
   ],
-  "env": {
-    "PIP_EXTRA_INDEX_URL": "https://download.pytorch.org/whl/cpu"
-  },
   "routes": [
     { "src": "/(.*)", "dest": "main.py" }
-  ],
-  "scripts": {
-    "postinstall": "pip install torch==1.13.0+cpu"
-  }
+  ]
 }
