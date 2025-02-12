@@ -1,9 +1,0 @@
-__pycache__/
-*.log
-*.csv
-*.json
-*.h5
-*.pt
-*.onnx
-node_modules/
-.env
