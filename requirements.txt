@@ -10,7 +10,6 @@ dnspython==2.3.0
 firebase-admin==6.1.0
 python-dotenv==1.0.0
 flask-cors==3.0.10
---find-links https://download.pytorch.org/whl/torch_stable.html
 torch==2.2.0+cpu
 nltk==3.7
 numpy==1.23.3
@@ -22,3 +21,4 @@ pyenchant==3.2.2
 wheel==0.40.0
 enchant==0.0.1
 requests-html==0.10.0
+setuptools
